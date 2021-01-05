@@ -8,7 +8,6 @@ class RegistrationForm extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Container(
-                //width: MediaQuery.of(context).size.width / numPerRow - 20,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12.0),
