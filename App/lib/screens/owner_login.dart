@@ -1,19 +1,22 @@
-import 'package:App/common/app_bar.dart';
-import 'package:flutter/material.dart';
+import 'package:App/screens/registration_form.dart';
 
-class OwnerLogin extends StatelessWidget {
+class OwnerLogin extends RegistrationForm {
+
+  OwnerLogin():
+        super(
+          textTitle: "Dueño",
+          textCode: "Codigo de Mascota",
+          textEnterCodeButton: "Buscar",
+          textRegisterButton: "Registrar Perro"
+      );
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(title: 'Dueño'),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
-        ),
-      ),
-    );
+  void onPressEnterCodeButton() {
+    // TODO: implement onPressEnterCodeButton
+  }
+
+  @override
+  void onPressRegisterButton() {
+    // TODO: implement onPressRegisterButton
   }
 }

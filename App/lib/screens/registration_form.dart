@@ -1,9 +1,18 @@
+import 'package:App/common/app_bar.dart';
 import 'package:flutter/material.dart';
 
-class RegistrationForm extends StatelessWidget {
+abstract class RegistrationForm extends StatelessWidget {
+  final String textTitle;
+  final String textCode;
+  final String textEnterCodeButton;
+  final String textRegisterButton;
+
+  RegistrationForm({ this.textTitle, this.textCode, this.textEnterCodeButton, this.textRegisterButton });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: CustomAppBar(title: textTitle),
         body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -27,14 +36,14 @@ class RegistrationForm extends StatelessWidget {
                     TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Codigo de Usuario',
+                        labelText: textCode,
                       ),
                     ),
                     SizedBox(height: 8),
                     FlatButton(
-                      onPressed: () {},
+                      onPressed: onPressEnterCodeButton,
                       child: Text(
-                        'Ingresar',
+                        textEnterCodeButton,
                         style: TextStyle(
                           color: Colors.black,
                         ),
@@ -46,9 +55,9 @@ class RegistrationForm extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: onPressRegisterButton,
                 child: Text(
-                  'Registrarme',
+                  textRegisterButton,
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -59,5 +68,9 @@ class RegistrationForm extends StatelessWidget {
         )
     );
   }
+
+  void onPressEnterCodeButton();
+
+  void onPressRegisterButton();
   
 }
