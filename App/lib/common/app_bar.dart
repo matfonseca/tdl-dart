@@ -12,7 +12,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     @override
     Widget build(BuildContext context) {
         return AppBar(
-            title: Row( // codigo repetido, hacer una clase custom para el titulo
+            title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
@@ -21,7 +21,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                   height: 32,
                 ),
                 Container(
-                  padding: const EdgeInsets.all(8.0), child: Text('WOOF - ' + title)
+                  padding: const EdgeInsets.all(8.0), child: Text('WOOF - $title')
                 )
               ],
             ),
