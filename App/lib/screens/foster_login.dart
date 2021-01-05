@@ -1,12 +1,11 @@
+import 'package:App/common/app_bar.dart';
 import 'package:flutter/material.dart';
-
-import 'package:App/common/tittle.dart';
 
 class FosterLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar('Adoptar'),
+      appBar: CustomAppBar(title: 'Adoptar'),
       body: Center(
         child: ElevatedButton(
           onPressed: () {

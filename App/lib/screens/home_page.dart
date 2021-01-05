@@ -1,15 +1,15 @@
+import 'package:App/common/app_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'foster_login.dart';
 import 'owner_login.dart';
-import 'package:App/common/tittle.dart';
 
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar('Home'),
+      appBar: CustomAppBar(title: 'Home'),
       body: Center(
         child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
