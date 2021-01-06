@@ -6,6 +6,7 @@ abstract class RegistrationForm extends StatelessWidget {
   final String textCode;
   final String textEnterCodeButton;
   final String textRegisterButton;
+  final textCodeController = TextEditingController();
 
   RegistrationForm({ this.textTitle, this.textCode, this.textEnterCodeButton, this.textRegisterButton });
 
@@ -34,6 +35,7 @@ abstract class RegistrationForm extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     TextField(
+                      controller: textCodeController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: textCode,
@@ -41,7 +43,9 @@ abstract class RegistrationForm extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     FlatButton(
-                      onPressed: onPressEnterCodeButton,
+                      onPressed: () {
+                        onPressEnterCodeButton(textCodeController.text);
+                      },
                       child: Text(
                         textEnterCodeButton,
                         style: TextStyle(
@@ -69,7 +73,7 @@ abstract class RegistrationForm extends StatelessWidget {
     );
   }
 
-  void onPressEnterCodeButton();
+  void onPressEnterCodeButton(String code);
 
   void onPressRegisterButton();
   

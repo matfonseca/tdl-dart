@@ -11,7 +11,7 @@ class OwnerLogin extends RegistrationForm {
       );
 
   @override
-  void onPressEnterCodeButton() {
+  void onPressEnterCodeButton(String code) {
     // TODO: implement onPressEnterCodeButton
   }
 
