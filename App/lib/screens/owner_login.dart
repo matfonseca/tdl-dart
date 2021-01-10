@@ -1,5 +1,7 @@
 import 'package:App/screens/login_form.dart';
 import 'package:flutter/material.dart';
+import 'dog_registration.dart';
+
 
 class OwnerLogin extends LoginForm {
 
@@ -18,6 +20,9 @@ class OwnerLogin extends LoginForm {
 
   @override
   void onPressRegisterButton(BuildContext context) {
-    // TODO: implement onPressRegisterButton
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DogRegistration()),
+    );
   }
 }
