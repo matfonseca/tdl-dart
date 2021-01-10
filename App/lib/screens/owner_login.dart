@@ -1,6 +1,7 @@
-import 'package:App/screens/registration_form.dart';
+import 'package:App/screens/login_form.dart';
+import 'package:flutter/material.dart';
 
-class OwnerLogin extends RegistrationForm {
+class OwnerLogin extends LoginForm {
 
   OwnerLogin():
         super(
@@ -16,7 +17,7 @@ class OwnerLogin extends RegistrationForm {
   }
 
   @override
-  void onPressRegisterButton() {
+  void onPressRegisterButton(BuildContext context) {
     // TODO: implement onPressRegisterButton
   }
 }

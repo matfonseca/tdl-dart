@@ -1,14 +1,14 @@
 import 'package:App/common/app_bar.dart';
 import 'package:flutter/material.dart';
 
-abstract class RegistrationForm extends StatelessWidget {
+abstract class LoginForm extends StatelessWidget {
   final String textTitle;
   final String textCode;
   final String textEnterCodeButton;
   final String textRegisterButton;
   final textCodeController = TextEditingController();
 
-  RegistrationForm({ this.textTitle, this.textCode, this.textEnterCodeButton, this.textRegisterButton });
+  LoginForm({ this.textTitle, this.textCode, this.textEnterCodeButton, this.textRegisterButton });
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,9 @@ abstract class RegistrationForm extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
               ),
               FlatButton(
-                onPressed: onPressRegisterButton,
+                onPressed: () {
+                  onPressRegisterButton(context);
+                },
                 child: Text(
                   textRegisterButton,
                   style: TextStyle(
@@ -75,6 +77,6 @@ abstract class RegistrationForm extends StatelessWidget {
 
   void onPressEnterCodeButton(String code);
 
-  void onPressRegisterButton();
+  void onPressRegisterButton(BuildContext context);
   
 }

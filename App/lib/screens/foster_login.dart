@@ -1,6 +1,8 @@
-import 'package:App/screens/registration_form.dart';
+import 'package:App/screens/foster_registration.dart';
+import 'package:App/screens/login_form.dart';
+import 'package:flutter/material.dart';
 
-class FosterLogin extends RegistrationForm {
+class FosterLogin extends LoginForm {
 
   FosterLogin():
       super(
@@ -17,7 +19,10 @@ class FosterLogin extends RegistrationForm {
   }
 
   @override
-  void onPressRegisterButton() {
-    // TODO: implement onPressRegisterButton
+  void onPressRegisterButton(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => FosterRegistration()),
+    );
   }
 }
