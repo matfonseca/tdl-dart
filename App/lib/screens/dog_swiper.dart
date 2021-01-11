@@ -7,15 +7,15 @@ class LikeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: () {},
-      elevation: 2.0,
-      fillColor: Colors.white,
+      elevation: 3.0,
+      fillColor: Colors.white, 
       child: Icon(
         Icons.favorite,
         color: Colors.pink,
         size: 35.0,
       ),
       padding: EdgeInsets.all(15.0),
-      shape: CircleBorder(),
+      shape: CircleBorder(side: BorderSide(color: Colors.pink[100])),
     );
   }
 }
@@ -25,15 +25,15 @@ class RejectButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: () {},
-      elevation: 2.0,
+      elevation: 3.0,
       fillColor: Colors.white,
       child: Icon(
-        Icons.beach_access,
-        color: Colors.yellow,
+        Icons.remove_outlined,
+        color: Colors.amber,
         size: 35.0,
       ),
       padding: EdgeInsets.all(15.0),
-      shape: CircleBorder(),
+      shape: CircleBorder(side: BorderSide(color: Colors.amber[100])),
     );
   }
 }
@@ -101,8 +101,8 @@ class DogProfile extends StatelessWidget {
           ButtonBar(
             alignment: MainAxisAlignment.spaceAround,
             children: [
-              LikeButton(),
               RejectButton(),
+              LikeButton(),
             ],
           ),
         ],
