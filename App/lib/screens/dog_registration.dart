@@ -4,6 +4,10 @@ import 'package:App/models/dog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:App/repository/dog_repository.dart';
 import 'package:App/screens/code_screen.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:App/repository/storage.dart';
+
 
 
 class DogRegistration extends StatefulWidget {
@@ -23,6 +27,7 @@ class _DogRegistrationState extends State<DogRegistration> {
   final textVaccinesController = TextEditingController();
   final textDescriptionController = TextEditingController();
   String _size;
+  File galleryFile;
 
   @override
   void dispose() {
@@ -38,13 +43,29 @@ class _DogRegistrationState extends State<DogRegistration> {
 
   @override
   Widget build(BuildContext context) {
+
+    imageSelectorGallery() async {
+      galleryFile = await ImagePicker.pickImage(
+        source: ImageSource.gallery,
+        // maxHeight: 50.0,
+        // maxWidth: 50.0,
+      );
+      print("You selected gallery image : " + galleryFile.path);
+      setState(() {});
+    }
+
     return Scaffold(
         appBar: CustomAppBar(title: "Registrar Perro"),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: ListView(
               children: <Widget>[
+                displaySelectedFile(galleryFile),
+                new RaisedButton(
+                child: new Text('Seleccione la imagen de la galeria'),
+                onPressed: imageSelectorGallery,
+                ),
+                SizedBox(height: 10),
                 TextField(
                   controller: textNameController,
                   decoration: InputDecoration(
@@ -53,6 +74,7 @@ class _DogRegistrationState extends State<DogRegistration> {
                     labelText: "Nombre",
                   ),
                 ),
+                SizedBox(height: 10),
                 DropdownButton(
                 hint: Text("Tamaño"),
                 isExpanded:true,
@@ -76,22 +98,27 @@ class _DogRegistrationState extends State<DogRegistration> {
                     _size = value;
                   });
                 }),
+                SizedBox(height: 10),
                 TextField(
                   controller: textBreedController,
+                  
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
                     border: OutlineInputBorder(),
                     labelText: "Raza",
                   ),
                 ),  
+                SizedBox(height: 10),
                 TextField(
                   controller: textAgeController,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
                     border: OutlineInputBorder(),
                     labelText: "Edad",
+                    
                   ),
                 ),
+                SizedBox(height: 10),
                 TextField(
                   controller: textVaccinesController,
                   decoration: InputDecoration(
@@ -100,6 +127,7 @@ class _DogRegistrationState extends State<DogRegistration> {
                     labelText: "Vacunas",
                   ),
                 ),
+                SizedBox(height: 10),
                 TextField(
                   controller: textDescriptionController,
                   decoration: InputDecoration(
@@ -108,18 +136,21 @@ class _DogRegistrationState extends State<DogRegistration> {
                     labelText: "Descripcion",
                   ),
                 ),
+                SizedBox(   //Use of SizedBox 
+                    height: 20, 
+                    ),
                 Container(
                   alignment: AlignmentDirectional.bottomEnd,
                   child: FlatButton(
                     onPressed: () {
-                      var name = this.textNameController.text;
+                      var name = this.textNameController.text;  
                       var breed = this.textBreedController.text;
                       var age = this.textAgeController.text;
                       var vaccines = this.textVaccinesController.text;
                       var description = this.textDescriptionController.text;
                       Dog dog = Dog(name, breed, int.parse(age), _size, vaccines, description);
                       DogRepository repository = DogRepository();
-                      repository.save(dog).then((String id) => {
+                      repository.saveModel(dog, galleryFile.path).then((String id) => {
                         Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => CodeScreen(code: id, continueFunction: () {
@@ -154,5 +185,17 @@ class _DogRegistrationState extends State<DogRegistration> {
     setState(() {
       hasOtherPets = newValue;
     });
+  }
+
+   Widget displaySelectedFile(File file) {
+    return new SizedBox(
+      height: 200.0,
+      width: 300.0,
+//child: new Card(child: new Text(''+galleryFile.toString())),
+//child: new Image.file(galleryFile),
+      child: file == null
+          ? new Text('')
+          : new Image.file(file),
+    );
   }
 }
