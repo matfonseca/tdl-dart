@@ -22,7 +22,7 @@ class _DogRegistrationState extends State<DogRegistration> {
   final textSizeController = TextEditingController();
   final textVaccinesController = TextEditingController();
   final textDescriptionController = TextEditingController();
-
+  String _size;
 
   @override
   void dispose() {
@@ -53,6 +53,29 @@ class _DogRegistrationState extends State<DogRegistration> {
                     labelText: "Nombre",
                   ),
                 ),
+                DropdownButton(
+                hint: Text("Tamaño"),
+                isExpanded:true,
+                value: _size,
+                items: [
+                  DropdownMenuItem(
+                    child: Text("Pequeño"),
+                    value: "Pequeño",
+                  ),
+                  DropdownMenuItem(
+                    child: Text("Mediano"),
+                    value: "Mediano",
+                  ),
+                  DropdownMenuItem(
+                    child: Text("Grande"),
+                    value: "Grande",
+                  )
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    _size = value;
+                  });
+                }),
                 TextField(
                   controller: textBreedController,
                   decoration: InputDecoration(
@@ -60,15 +83,7 @@ class _DogRegistrationState extends State<DogRegistration> {
                     border: OutlineInputBorder(),
                     labelText: "Raza",
                   ),
-                ),
-                TextField(
-                  controller: textSizeController,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
-                    border: OutlineInputBorder(),
-                    labelText: "Tamaño",
-                  ),
-                ),
+                ),  
                 TextField(
                   controller: textAgeController,
                   decoration: InputDecoration(
@@ -99,11 +114,10 @@ class _DogRegistrationState extends State<DogRegistration> {
                     onPressed: () {
                       var name = this.textNameController.text;
                       var breed = this.textBreedController.text;
-                      var size = this.textSizeController.text;
                       var age = this.textAgeController.text;
                       var vaccines = this.textVaccinesController.text;
                       var description = this.textDescriptionController.text;
-                      Dog dog = Dog(name, breed, int.parse(age), size, vaccines, description);
+                      Dog dog = Dog(name, breed, int.parse(age), _size, vaccines, description);
                       DogRepository repository = DogRepository();
                       repository.save(dog).then((String id) => {
                         Navigator.push(
