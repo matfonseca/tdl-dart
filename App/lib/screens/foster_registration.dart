@@ -1,6 +1,8 @@
 import 'package:App/common/app_bar.dart';
 import 'package:App/screens/code_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:App/repository/foster_repository.dart';
+import 'package:App/models/foster.dart';
 
 
 class FosterRegistration extends StatefulWidget {
@@ -116,13 +118,25 @@ class _FosterRegistrationState extends State<FosterRegistration> {
                   alignment: AlignmentDirectional.bottomEnd,
                   child: FlatButton(
                     onPressed: () {
-                      Navigator.push(
+                      var name = this.textNameController.text;  
+                      var phone = this.textPhoneController.text;
+                      var age = this.textAgeController.text;
+                      var amountRoommates = this.textAmountRoommatesController.text;
+                      var homeType = this.textHomeTypeController.text;
+                      var hasBackyard = this.hasBackyard;
+                      var hasOtherPets = this.hasOtherPets;
+                      Foster foster = Foster(name, age, phone, int.parse(amountRoommates), homeType, hasBackyard, hasOtherPets);
+                      FosterRepository repository = FosterRepository();
+                      repository.save(foster).then(
+                        (id) => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CodeScreen(code: "123", continueFunction: () {
+                        MaterialPageRoute(builder: (context) => CodeScreen(code: id, continueFunction: () {
                           int count = 0;
                           Navigator.of(context).popUntil((_) => count++ >= 2);
                         }))
+                      )
                       );
+                      
                     },
                     child: Text(
                       "Registrar",
