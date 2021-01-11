@@ -1,8 +1,10 @@
 import 'package:App/common/app_bar.dart';
-import 'package:App/screens/code_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:App/models/dog.dart';
 import 'package:flutter/foundation.dart';
+import 'package:App/repository/dog_repository.dart';
+import 'package:App/screens/code_screen.dart';
+
 
 class DogRegistration extends StatefulWidget {
 
@@ -102,7 +104,16 @@ class _DogRegistrationState extends State<DogRegistration> {
                       var vaccines = this.textVaccinesController.text;
                       var description = this.textDescriptionController.text;
                       Dog dog = Dog(name, breed, int.parse(age), size, vaccines, description);
-                      debugPrint('${dog.toJson()}');
+                      DogRepository repository = DogRepository();
+                      repository.save(dog).then((String id) => {
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CodeScreen(code: id, continueFunction: () {
+                          int count = 0;
+                          Navigator.of(context).popUntil((_) => count++ >= 2);
+                        }))
+                      )
+                      });
                     },
                     child: Text(
                       "Registrar",
