@@ -25,4 +25,9 @@ class FireStore  {
 
     }
 
+    Future<List<QueryDocumentSnapshot>> getAll() async{
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection(this.collectionName).get();
+      return querySnapshot.docs;
+    }
+
 }

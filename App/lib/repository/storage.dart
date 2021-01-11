@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 class Storage {
   
   Future<String> uploadFile(String filePath, String ref) async {
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   File file = File(filePath);
   firebase_storage.TaskSnapshot result = await firebase_storage.FirebaseStorage.instance.ref(ref).putFile(file);
   String location = await result.ref.getDownloadURL();

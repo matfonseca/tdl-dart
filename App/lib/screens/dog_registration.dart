@@ -28,6 +28,8 @@ class _DogRegistrationState extends State<DogRegistration> {
   final textDescriptionController = TextEditingController();
   String _size;
   File galleryFile;
+  DogRepository repository = DogRepository();
+
 
   @override
   void dispose() {
@@ -148,9 +150,8 @@ class _DogRegistrationState extends State<DogRegistration> {
                       var age = this.textAgeController.text;
                       var vaccines = this.textVaccinesController.text;
                       var description = this.textDescriptionController.text;
-                      Dog dog = Dog(name, breed, int.parse(age), _size, vaccines, description);
-                      DogRepository repository = DogRepository();
-                      repository.saveModel(dog, galleryFile.path).then((String id) => {
+                      Dog dog = Dog(name, breed, int.parse(age), _size, vaccines, description, "");
+                      this.repository.saveModel(dog, galleryFile.path).then((String id) => {
                         Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => CodeScreen(code: id, continueFunction: () {

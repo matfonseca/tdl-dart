@@ -20,7 +20,7 @@ class _FosterRegistrationState extends State<FosterRegistration> {
   final textAgeController = TextEditingController();
   final textAmountRoommatesController = TextEditingController();
   final textHomeTypeController = TextEditingController();
-
+  FosterRepository repository = FosterRepository();
 
   @override
   void dispose() {
@@ -126,8 +126,7 @@ class _FosterRegistrationState extends State<FosterRegistration> {
                       var hasBackyard = this.hasBackyard;
                       var hasOtherPets = this.hasOtherPets;
                       Foster foster = Foster(name, age, phone, int.parse(amountRoommates), homeType, hasBackyard, hasOtherPets);
-                      FosterRepository repository = FosterRepository();
-                      repository.save(foster).then(
+                      this.repository.save(foster).then(
                         (id) => Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => CodeScreen(code: id, continueFunction: () {

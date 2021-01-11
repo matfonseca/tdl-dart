@@ -1,4 +1,6 @@
 import 'package:App/repository/storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'firestore.dart';
 import 'package:App/models/dog.dart';
 import 'package:App/repository/storage.dart';
@@ -8,7 +10,12 @@ class DogRepository extends FireStore with Storage {
 
   Future<Dog> getModel(id) async{
     Map<String, dynamic> data =  await this.get(id);
-    return Dog(data["name"], data["breed"], data["age"], data["size"], data["vaccines"], data["description"]); 
+    return Dog(data["name"], data["breed"], data["age"], data["size"], data["vaccines"], data["description"], data["image_uri"]); 
+  }
+
+  Future<List<Dog>> getDogs() async{
+    List<QueryDocumentSnapshot> dogsDocuments = await this.getAll();
+    return dogsDocuments.map((data) => Dog(data["name"], data["breed"], data["age"], data["size"], data["vaccines"], data["description"], data["image_uri"])).toList(); 
   }
 
   Future<String> saveModel(dog, imagePath) async {
