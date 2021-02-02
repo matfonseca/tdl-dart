@@ -14,7 +14,7 @@ class FosterLogin extends LoginForm {
 
 
   @override
-  void onPressEnterCodeButton(String code) {
+  void onPressEnterCodeButton(BuildContext context, String code) {
     // TODO: implement onPressEnterCodeButton
   }
 

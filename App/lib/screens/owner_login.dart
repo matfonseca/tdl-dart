@@ -1,6 +1,7 @@
 import 'package:App/screens/login_form.dart';
 import 'package:flutter/material.dart';
 import 'dog_registration.dart';
+import 'foster_search.dart';
 
 class OwnerLogin extends LoginForm {
 
@@ -13,8 +14,11 @@ class OwnerLogin extends LoginForm {
       );
 
   @override
-  void onPressEnterCodeButton(String code) {
-    // TODO: implement onPressEnterCodeButton
+  void onPressEnterCodeButton(BuildContext context, String code) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => FosterSearch(code: code)),
+    );
   }
 
   @override

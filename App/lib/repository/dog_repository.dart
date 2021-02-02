@@ -1,9 +1,7 @@
 import 'package:App/repository/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'firestore.dart';
 import 'package:App/models/dog.dart';
-import 'package:App/repository/storage.dart';
 
 class DogRepository extends FireStore with Storage {
   String collectionName = "Dogs";

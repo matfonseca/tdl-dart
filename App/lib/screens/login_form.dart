@@ -44,7 +44,7 @@ abstract class LoginForm extends StatelessWidget {
                     SizedBox(height: 8),
                     FlatButton(
                       onPressed: () {
-                        onPressEnterCodeButton(textCodeController.text);
+                        onPressEnterCodeButton(context, textCodeController.text);
                       },
                       child: Text(
                         textEnterCodeButton,
@@ -75,7 +75,7 @@ abstract class LoginForm extends StatelessWidget {
     );
   }
 
-  void onPressEnterCodeButton(String code);
+  void onPressEnterCodeButton(BuildContext context, String code);
 
   void onPressRegisterButton(BuildContext context);
   
