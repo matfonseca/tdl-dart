@@ -1,18 +1,22 @@
 import 'package:App/common/app_bar.dart';
 import 'package:App/models/dog.dart';
 import 'package:App/repository/dog_repository.dart';
+import 'package:App/repository/like_repository.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class LikeButton extends StatelessWidget {
   final onPress;
+  final Dog dog;
 
-  LikeButton({this.onPress});
+  LikeButton({this.onPress, this.dog});
 
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
-      onPressed: () {onPress();},
+      onPressed: () {
+        onPress(this.dog);
+        },
       elevation: 3.0,
       fillColor: Colors.white, 
       child: Icon(
@@ -28,13 +32,14 @@ class LikeButton extends StatelessWidget {
 
 class RejectButton extends StatelessWidget {
   final onPress;
+  final Dog dog;
 
-  RejectButton({this.onPress});
+  RejectButton({this.onPress, this.dog});
 
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
-      onPressed: () {onPress();},
+      onPressed: () {onPress(this.dog);},
       elevation: 3.0,
       fillColor: Colors.white,
       child: Icon(
@@ -134,8 +139,8 @@ class DogProfile extends StatelessWidget {
           ButtonBar(
             alignment: MainAxisAlignment.spaceAround,
             children: [
-              RejectButton(onPress: onPass),
-              LikeButton(onPress: onLike),
+              RejectButton(onPress: onPass, dog: dog),
+              LikeButton(onPress: onLike, dog: dog),
             ],
           ),
         ],
@@ -146,21 +151,23 @@ class DogProfile extends StatelessWidget {
 
 class DogSwiper extends StatefulWidget {
   final List<Dog> dogs;
-  final String fosterCode;
+  final String fosterId;
 
-  DogSwiper({this.dogs, this.fosterCode});
+  DogSwiper({this.dogs, this.fosterId});
 
   @override
-  _DogSwiper createState() => _DogSwiper(dogs: this.dogs, fosterCode: this.fosterCode);
+  _DogSwiper createState() => _DogSwiper(dogs: this.dogs, fosterId: this.fosterId);
 }
 
 class _DogSwiper extends State<DogSwiper> {
   final List<Dog> dogs;
-  final String fosterCode;
+  final String fosterId;
   int _dogIndex = 0;
+  final LikesRepository likesRepository = LikesRepository();
 
-  void _onLike() {
-    // save like with fosterCode, idDog
+  _DogSwiper({this.dogs, this.fosterId});
+
+  void _passDog() {
     setState(() {
       _dogIndex++;
       if (_dogIndex == dogs.length) {
@@ -168,14 +175,21 @@ class _DogSwiper extends State<DogSwiper> {
       }
     });
   }
+  void _onLike(Dog dog) {
+    // save like with fosterCode, idDog
+    likesRepository.saveLike(dog.dogId, fosterId);
+    _passDog();
+  }
 
-  _DogSwiper({this.dogs, this.fosterCode});
+  void _onDislike(Dog dog) {
+    _passDog();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: "Adoptar"),
-      body: DogProfile(dog: dogs[_dogIndex], onLike: _onLike, onPass: _onLike),
+      body: DogProfile(dog: dogs[_dogIndex], onLike: _onLike, onPass: _onDislike),
     );
   }
 }

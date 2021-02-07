@@ -22,7 +22,7 @@ class FosterLogin extends LoginForm {
     repository.getDogs().then((dogs) => {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => DogSwiper(dogs: dogs, fosterCode: code)),
+        MaterialPageRoute(builder: (context) => DogSwiper(dogs: dogs, fosterId: code)),
       )
     });
   }

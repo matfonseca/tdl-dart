@@ -1,5 +1,6 @@
 class Dog {
 
+  String dogId;
   String name;
   String breed; 
   int age; 
@@ -8,16 +9,7 @@ class Dog {
   String description;
   String imageUri;
 
-
-  Dog(String name, String breed, int age, String size, String vaccines, String description, String imageUri){
-    this.name = name;
-    this.breed = breed;
-    this.age = age;
-    this.size = size;
-    this.vaccines = vaccines;
-    this.description = description;
-    this.imageUri = imageUri;
-  }
+  Dog({this.name, this.breed, this.age, this.size, this. vaccines, this.description, this.imageUri, this.dogId});
 
   setImageUri(uri){
     this.imageUri = uri;

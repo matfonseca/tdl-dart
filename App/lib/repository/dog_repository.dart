@@ -8,12 +8,30 @@ class DogRepository extends FireStore with Storage {
 
   Future<Dog> getModel(id) async{
     Map<String, dynamic> data =  await this.get(id);
-    return Dog(data["name"], data["breed"], data["age"], data["size"], data["vaccines"], data["description"], data["image_uri"]); 
+
+    return Dog(name: data["name"],
+        breed: data["breed"],
+        age: data["age"],
+        size: data["size"],
+        vaccines: data["vaccines"],
+        description: data["description"],
+        imageUri: data["image_uri"],
+        dogId: id
+    );
   }
 
   Future<List<Dog>> getDogs() async{
     List<QueryDocumentSnapshot> dogsDocuments = await this.getAll();
-    return dogsDocuments.map((data) => Dog(data["name"], data["breed"], data["age"], data["size"], data["vaccines"], data["description"], data["image_uri"])).toList(); 
+    return dogsDocuments.map((data) => Dog(
+        name: data["name"],
+        breed: data["breed"],
+        age: data["age"],
+        size: data["size"],
+        vaccines: data["vaccines"],
+        description: data["description"],
+        imageUri: data["image_uri"],
+        dogId: data.id
+    )).toList();
   }
 
   Future<String> saveModel(dog, imagePath) async {
