@@ -16,7 +16,8 @@ class FosterSearch extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
           child: MyStatelessWidget()
-        ));
+        )
+    );
   }
 }
 
@@ -40,7 +41,7 @@ class CustomListItem extends StatelessWidget {
           Expanded(
             flex: 3,
             child: _FosterDescription(
-              foster:this.foster
+              foster: this.foster
             ),
           ),
         ],
@@ -59,7 +60,6 @@ class _FosterDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     Icon backyardIcon = this.foster.hasBackyard ? Icon(
       Icons.check,
       color: Colors.green,
@@ -70,7 +70,6 @@ class _FosterDescription extends StatelessWidget {
       size: 24.0,
       semanticLabel: 'Text to announce in accessibility modes',
     ) ;
-
 
     Icon otherPetsIcon = this.foster.hasOtherPets ? Icon(
       Icons.check,

@@ -1,8 +1,12 @@
+import 'package:App/repository/dog_repository.dart';
+import 'package:App/screens/dog_swiper.dart';
 import 'package:App/screens/foster_registration.dart';
 import 'package:App/screens/login_form.dart';
 import 'package:flutter/material.dart';
 
 class FosterLogin extends LoginForm {
+
+  final DogRepository repository = DogRepository();
 
   FosterLogin():
       super(
@@ -15,7 +19,12 @@ class FosterLogin extends LoginForm {
 
   @override
   void onPressEnterCodeButton(BuildContext context, String code) {
-    // TODO: implement onPressEnterCodeButton
+    repository.getDogs().then((dogs) => {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => DogSwiper(dogs: dogs, fosterCode: code)),
+      )
+    });
   }
 
   @override

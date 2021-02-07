@@ -1,5 +1,6 @@
 import 'package:App/common/app_bar.dart';
 import 'package:App/models/dog.dart';
+import 'package:App/repository/dog_repository.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -144,33 +145,22 @@ class DogProfile extends StatelessWidget {
 }
 
 class DogSwiper extends StatefulWidget {
-  final List<Dog> dogs = [
-    new Dog(
-      'Pepe', 'Caniche', 3, 'pequeño', 'todas', 'Es un perro cariñoso, sacado de la calle.', 'https://www.washingtonpost.com/resizer/uwlkeOwC_3JqSUXeH8ZP81cHx3I=/arc-anglerfish-washpost-prod-washpost/public/HB4AT3D3IMI6TMPTWIZ74WAR54.jpg'
-    ),
-    new Dog(
-      'Pepa', 'Caniche', 3, 'pequeño', 'todas', 'Es un perro cariñoso, sacado de la calle.', 'https://www.cesarsway.com/wp-content/uploads/2019/10/AdobeStock_190562703.jpeg'
-    ),
-    new Dog(
-      'Popi', 'Caniche', 3, 'pequeño', 'todas', 'Es un perro cariñoso, sacado de la calle.', 'https://www.dogstrust.org.uk/help-advice/_images/164742v800_puppy-1.jpg'
-    ),
-    new Dog(
-      'Marta', 'Caniche', 3, 'pequeño', 'todas', 'Es un perro cariñoso, sacado de la calle.', 'https://www.cdc.gov/healthypets/images/pets/cute-dog-headshot.jpg'
-    ),
-  ];
+  final List<Dog> dogs;
+  final String fosterCode;
 
-  // DogSwiper({this.dogs});
+  DogSwiper({this.dogs, this.fosterCode});
 
   @override
-  _DogSwiper createState() => _DogSwiper(dogs: dogs);
+  _DogSwiper createState() => _DogSwiper(dogs: this.dogs, fosterCode: this.fosterCode);
 }
 
 class _DogSwiper extends State<DogSwiper> {
   final List<Dog> dogs;
-
+  final String fosterCode;
   int _dogIndex = 0;
 
   void _onLike() {
+    // save like with fosterCode, idDog
     setState(() {
       _dogIndex++;
       if (_dogIndex == dogs.length) {
@@ -179,7 +169,7 @@ class _DogSwiper extends State<DogSwiper> {
     });
   }
 
-  _DogSwiper({this.dogs});
+  _DogSwiper({this.dogs, this.fosterCode});
 
   @override
   Widget build(BuildContext context) {

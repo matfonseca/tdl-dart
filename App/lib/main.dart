@@ -4,7 +4,7 @@ import 'screens/home_page.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: 'Navigation Basics',
+    title: 'WOOF',
     home: HomePage(),
   ));
 }
