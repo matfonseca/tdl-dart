@@ -5,8 +5,9 @@ import 'package:App/models/foster.dart';
 class FosterSearch extends StatelessWidget {
 
   final String code;
+  final List<Foster> fosters;
   
-  FosterSearch({ this.code});
+  FosterSearch({ this.code, this.fosters});
 
   
   @override
@@ -15,15 +16,11 @@ class FosterSearch extends StatelessWidget {
         appBar: CustomAppBar(title: "Buscar dueño"),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
-          child: MyStatelessWidget()
+          child: MyStatelessWidget(fosters: fosters != null ? fosters : [])
         )
     );
   }
 }
-
-
-
-
 
 class CustomListItem extends StatelessWidget {
   const CustomListItem({
@@ -132,11 +129,14 @@ class _FosterDescription extends StatelessWidget {
 
 /// This is the stateless widget that the main application instantiates.
 class MyStatelessWidget extends StatelessWidget {
-  MyStatelessWidget({Key key}) : super(key: key);
+
+  final List<Foster> fosters;
+
+  MyStatelessWidget({Key key, this.fosters}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
-    List<Foster> fosters = [Foster("Matias", "24", "123123", 3, "casa", true, false), Foster("Cami", "22", "123123", 3, "dpto", false, true),Foster("Matias", "24", "123123", 3, "casa", true, false), Foster("Cami", "22", "123123", 3, "dpto", false, true), Foster("Matias", "24", "123123", 3, "casa", true, false), Foster("Cami", "22", "123123", 3, "dpto", false, true)];
+    // List<Foster> fosters = [Foster("Matias", "24", "123123", 3, "casa", true, false), Foster("Cami", "22", "123123", 3, "dpto", false, true),Foster("Matias", "24", "123123", 3, "casa", true, false), Foster("Cami", "22", "123123", 3, "dpto", false, true), Foster("Matias", "24", "123123", 3, "casa", true, false), Foster("Cami", "22", "123123", 3, "dpto", false, true)];
     List<CustomListItem> foster_list = fosters.map((foster) => CustomListItem(foster:foster)).toList();
 
     return ListView(

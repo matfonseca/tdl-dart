@@ -12,8 +12,12 @@ class FosterRepository extends FireStore {
     List<Like> dogLikes = await likes.getLikesForDog(dogId);
     Set<String> fosterIds = Set.from(dogLikes.map((like) => like.fosterId).toList());
     List<QueryDocumentSnapshot> fosterDocs = await this.getAll();
-    return fosterDocs.where((doc) => fosterIds.contains(doc['id'])).map((doc) => Foster(
-      doc['name'], doc['age'], doc['phone'], doc['amountRoommates'], doc['homeType'], doc['hasBackyard'], doc['hasOtherPets']
-    ));
+    var a = fosterDocs.where((doc) => fosterIds.contains(doc.id)).toList().map((doc) => Foster(
+      doc.data()['name'], doc.data()['age'], doc.data()['phone'], doc.data()['amountRoommates'], doc.data()['homeType'], doc.data()['hasBackyard'], doc.data()['hasOtherPets']
+    )).toList();
+    print(dogLikes[0]);
+    print(fosterDocs[0].data());
+    print(a);
+    return a;
   }
 }
