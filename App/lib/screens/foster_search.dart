@@ -136,7 +136,19 @@ class MyStatelessWidget extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    // List<Foster> fosters = [Foster("Matias", "24", "123123", 3, "casa", true, false), Foster("Cami", "22", "123123", 3, "dpto", false, true),Foster("Matias", "24", "123123", 3, "casa", true, false), Foster("Cami", "22", "123123", 3, "dpto", false, true), Foster("Matias", "24", "123123", 3, "casa", true, false), Foster("Cami", "22", "123123", 3, "dpto", false, true)];
+    
+    if(fosters.length == 0){
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+                  SizedBox(height: 10),
+                  Text("No hay ningun candidato aun!"),
+        ]
+      );
+      
+    }
+
     List<CustomListItem> foster_list = fosters.map((foster) => CustomListItem(foster:foster)).toList();
 
     return ListView(

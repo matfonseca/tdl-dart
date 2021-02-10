@@ -1,5 +1,6 @@
 import 'package:App/common/app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:clipboard/clipboard.dart';
 
 class CodeScreen extends StatelessWidget {
   final String code;
@@ -9,6 +10,7 @@ class CodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: CustomAppBar(title: "Codigo"),
         body: Center (
@@ -19,10 +21,22 @@ class CodeScreen extends StatelessWidget {
                   Text(
                     "Tu codigo es",
                   ),
-                  Text(
+                  Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
                     this.code,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  IconButton(
+                  icon: new Icon(Icons.content_copy, size:20),
+                  highlightColor: Colors.pink,
+                  onPressed:(){
+                        FlutterClipboard.copy(this.code);
+                        }
+                  ),
+                  ],
+                ),
                   Text("Guardar este codigo para ingresar"),
                   SizedBox(height: 20),
                   FlatButton(
