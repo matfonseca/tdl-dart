@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'foster_login.dart';
 import 'owner_login.dart';
+import 'contact.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -29,6 +30,15 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => OwnerLogin()),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: Text('Contactanos'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Contact()),
                 );
               },
             ),
